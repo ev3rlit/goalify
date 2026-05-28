@@ -17,6 +17,8 @@ Use this skill to produce a copy-pasteable prompt for a new session. The output 
 - Do not invent requirements. If something is uncertain, label it as a decision point or optional check.
 - Keep the prompt self-contained enough for a new session to begin work immediately.
 - Keep the generated goal under 4,000 characters.
+- Prefer compact task context over full conversation summaries.
+- If the source context is too large, summarize aggressively and point to files instead.
 
 ## Workflow
 
