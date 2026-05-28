@@ -1,28 +1,13 @@
 # Goalify
 
-Goalify is a Codex skill that turns an existing conversation into a fresh-session `/goal` prompt.
+Goalify는 지금까지 나눈 대화를 새 세션에서 바로 이어갈 수 있는 `/goal` 프롬프트로 정리해주는 Codex Skill입니다.
 
-It is useful when you want a new agent session to continue work with the right objective, constraints, context, and completion criteria without rereading the whole thread.
+## 사용법
 
-## Contents
-
-- `Skills/goalify/SKILL.md` - the skill instructions
-- `Skills/goalify/agents/openai.yaml` - OpenAI agent metadata for the skill
-
-## Install
-
-Copy the skill directory into your Codex skills folder:
-
-```sh
-cp -R Skills/goalify ~/.codex/skills/goalify
-```
-
-Then restart Codex or reload skills if your environment supports it.
-
-## Usage
-
-Ask Codex to use Goalify when you need a handoff prompt:
+무엇을 할지 충분히 대화하고, 어느 정도 결론이 나면 이렇게 입력하세요.
 
 ```text
-Use goalify to turn this conversation into a new-session /goal prompt.
+지금까지 대화 내용을 토대로 $goalify
 ```
+
+그러면 Goalify가 다음 세션에 그대로 붙여 넣을 수 있는 목표, 맥락, 제약, 완료 조건을 정리해줍니다.
