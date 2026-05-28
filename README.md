@@ -1,13 +1,13 @@
 # Goalify
 
-Goalify는 지금까지 나눈 대화를 새 세션에서 바로 이어갈 수 있는 `/goal` 프롬프트로 정리해주는 Codex Skill입니다.
+Goalify turns an ongoing conversation into a clear `/goal` prompt you can use to start fresh without losing the thread.
 
-## 사용법
+## How to use it
 
-무엇을 할지 충분히 대화하고, 어느 정도 결론이 나면 이렇게 입력하세요.
+Talk through the work first. Explore the problem, make decisions, narrow the scope, and get to the point where the next step feels clear.
 
-```text
-지금까지 대화 내용을 토대로 $goalify
-```
+Then ask for a goal in plain language:
 
-그러면 Goalify가 다음 세션에 그대로 붙여 넣을 수 있는 목표, 맥락, 제약, 완료 조건을 정리해줍니다.
+> Can you turn this conversation into a `/goal` prompt for a new session?
+
+Goalify will package the objective, context, constraints, and completion criteria into something you can paste directly into the next session.
