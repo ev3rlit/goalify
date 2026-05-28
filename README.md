@@ -9,7 +9,7 @@ Talk through the work first. Explore the problem, make decisions, narrow the sco
 Then ask the assistant to use goalify:
 
 ```text
-Use goalify to turn this conversation into a `/goal` prompt for a new session.
+Use goalify to turn this conversation
 ```
 
 Goalify will package the objective, context, constraints, and completion criteria into something you can paste directly into the next session.
