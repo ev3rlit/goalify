@@ -1,0 +1,7 @@
+interface:
+  display_name: "Goalify"
+  short_description: "Turn chats into fresh-session goal prompts"
+  default_prompt: "Use $goalify to turn this conversation into a copy-pasteable /goal prompt for a new session."
+
+policy:
+  allow_implicit_invocation: true
