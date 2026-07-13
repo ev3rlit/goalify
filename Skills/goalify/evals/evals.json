@@ -1,0 +1,47 @@
+{
+  "skill_name": "goalify",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "우리는 `/workspace/shop-api`의 장바구니 가격 오류를 조사했고, 원인이 `internal/cart/cache.go`에서 할인 전 가격을 캐시 키에 쓰지 않는 것이라고 결론 냈어. 기존 변경은 보존하고 `go test ./...`로 검증하기로 했어. 이 대화를 다음 세션에서 바로 구현할 수 있는 /goal로 만들어줘.",
+      "expected_output": "A Korean, copy-pasteable /goal prompt with exact paths and verification, plus an explicit completion explanation contract covering what, why, and how in plain concrete language.",
+      "files": [],
+      "expectations": [
+        "The first nonblank line is /goal and the output is written in Korean.",
+        "The prompt preserves /workspace/shop-api, internal/cart/cache.go, the dirty-worktree boundary, and go test ./....",
+        "The prompt explicitly requires the final response to explain what was done, why the important approach was chosen, and how it was verified.",
+        "The prompt requires the core mechanism to be explained in direct language a 12-year-old could follow while retaining and defining necessary technical terms.",
+        "The prompt asks for material actions and evidence rather than private chain of thought or a raw command log.",
+        "The complete Codex /goal prompt does not exceed 4,000 characters."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Turn this into a fresh-session investigation brief: in `/workspace/metrics`, p95 latency rose after the last release. Start read-only, compare the release diff and traces, do not roll back or edit production, and label hypotheses separately from evidence. Use goalify.",
+      "expected_output": "An English /goal investigation prompt that preserves the read-only boundary and evidence rules without inventing a cause, and requires a final user-facing explanation of the material investigation steps and rationale.",
+      "files": [],
+      "expectations": [
+        "The first nonblank line is /goal and the output is written in English.",
+        "The prompt preserves /workspace/metrics, the read-only start, release-diff and trace comparison, and the prohibition on rollback or production edits.",
+        "The prompt keeps hypotheses separate from verified evidence and does not invent a latency cause.",
+        "The prompt explicitly requires the final response to explain the material investigation stages, why they were performed, and how conclusions were checked.",
+        "The prompt requires a direct, concrete explanation for a non-expert and distinguishes verified facts from uncertainty.",
+        "The complete Codex /goal prompt does not exceed 4,000 characters."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "`/workspace/design-notes`에서 인증 아키텍처 문서를 계획만 하는 다음 작업으로 넘기고 싶어. 이번에는 코드를 수정하거나 테스트하지 않고, `docs/auth/current.md`를 먼저 읽은 뒤 결정된 내용과 열린 질문을 구분해야 해. goalify로 정리해줘.",
+      "expected_output": "A planning-only Korean /goal that omits irrelevant implementation work, preserves the documentation boundary, and still asks the next session to explain its process, choices, and unresolved limits after completion.",
+      "files": [],
+      "expectations": [
+        "The first nonblank line is /goal and the output is written in Korean.",
+        "The prompt preserves /workspace/design-notes, docs/auth/current.md, and the planning-only boundary with no code changes or tests.",
+        "The prompt separates settled decisions from open questions.",
+        "The prompt explicitly requires the final response to explain the important planning stages and why decisions were made.",
+        "The prompt asks for direct, concrete explanations and clearly identifies unresolved questions or unverified limits.",
+        "The complete Codex /goal prompt does not exceed 4,000 characters."
+      ]
+    }
+  ]
+}
