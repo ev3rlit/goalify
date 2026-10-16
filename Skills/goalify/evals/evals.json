@@ -3,44 +3,154 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "우리는 `/workspace/shop-api`의 장바구니 가격 오류를 조사했고, 원인이 `internal/cart/cache.go`에서 할인 전 가격을 캐시 키에 쓰지 않는 것이라고 결론 냈어. 기존 변경은 보존하고 `go test ./...`로 검증하기로 했어. 이 대화를 다음 세션에서 바로 구현할 수 있는 /goal로 만들어줘.",
+      "prompt": "우리는 `/workspace/shop-api`의 장바구니 가격 오류를 조사했고, 원인이 `internal/cart/cache.go`에서 할인 전 가격을 캐시 키에 쓰지 않는 것이라고 결론 냈어. 기존 변경은 보존하고 `go test ./...`로 검증하기로 했어. 이 대화를 다음 세션에서 바로 구현할 수 있는 /goal로 만들어줘. Codex CLI에 붙여 넣을 거야.",
       "expected_output": "A Korean, copy-pasteable /goal prompt with exact paths and verification, plus an explicit completion explanation contract covering what, why, and how in plain concrete language.",
       "files": [],
       "expectations": [
-        "The first nonblank line is /goal and the output is written in Korean.",
+        "The first nonblank line inside the prompt block is /goal and the output is written in Korean.",
         "The prompt preserves /workspace/shop-api, internal/cart/cache.go, the dirty-worktree boundary, and go test ./....",
         "The prompt explicitly requires the final response to explain what was done, why the important approach was chosen, and how it was verified.",
-        "The prompt requires the core mechanism to be explained in direct language a 12-year-old could follow while retaining and defining necessary technical terms.",
+        "The prompt asks for a plain-language explanation of material changes or findings and remaining limits without imposing an unrelated teaching format.",
         "The prompt asks for material actions and evidence rather than private chain of thought or a raw command log.",
-        "The complete Codex /goal prompt does not exceed 4,000 characters."
+        "The complete goal inside the block is under 4,000 characters for the explicitly requested Codex CLI destination."
       ]
     },
     {
       "id": 2,
       "prompt": "Turn this into a fresh-session investigation brief: in `/workspace/metrics`, p95 latency rose after the last release. Start read-only, compare the release diff and traces, do not roll back or edit production, and label hypotheses separately from evidence. Use goalify.",
-      "expected_output": "An English /goal investigation prompt that preserves the read-only boundary and evidence rules without inventing a cause, and requires a final user-facing explanation of the material investigation steps and rationale.",
+      "expected_output": "An English /goal investigation prompt preserving the read-only boundary, evidence rules, and uncertainty, with a concise final explanation contract.",
       "files": [],
       "expectations": [
-        "The first nonblank line is /goal and the output is written in English.",
+        "The first nonblank line inside the prompt block is /goal and the output is written in English.",
         "The prompt preserves /workspace/metrics, the read-only start, release-diff and trace comparison, and the prohibition on rollback or production edits.",
         "The prompt keeps hypotheses separate from verified evidence and does not invent a latency cause.",
-        "The prompt explicitly requires the final response to explain the material investigation stages, why they were performed, and how conclusions were checked.",
+        "The prompt requires an explanation of material findings, important reasons, and the evidence used to check conclusions.",
         "The prompt requires a direct, concrete explanation for a non-expert and distinguishes verified facts from uncertainty.",
-        "The complete Codex /goal prompt does not exceed 4,000 characters."
+        "The output is a handoff only: it does not execute the task or add unrequested commit, push, or publication steps."
       ]
     },
     {
       "id": 3,
       "prompt": "`/workspace/design-notes`에서 인증 아키텍처 문서를 계획만 하는 다음 작업으로 넘기고 싶어. 이번에는 코드를 수정하거나 테스트하지 않고, `docs/auth/current.md`를 먼저 읽은 뒤 결정된 내용과 열린 질문을 구분해야 해. goalify로 정리해줘.",
-      "expected_output": "A planning-only Korean /goal that omits irrelevant implementation work, preserves the documentation boundary, and still asks the next session to explain its process, choices, and unresolved limits after completion.",
+      "expected_output": "A planning-only Korean /goal that preserves the documentation boundary, separates decisions and questions, and requests a concise explanation of findings, reasons, and remaining limits.",
       "files": [],
       "expectations": [
-        "The first nonblank line is /goal and the output is written in Korean.",
+        "The first nonblank line inside the prompt block is /goal and the output is written in Korean.",
         "The prompt preserves /workspace/design-notes, docs/auth/current.md, and the planning-only boundary with no code changes or tests.",
         "The prompt separates settled decisions from open questions.",
-        "The prompt explicitly requires the final response to explain the important planning stages and why decisions were made.",
+        "The prompt requires an explanation of important planning decisions and their reasons without mandating a chronological process log.",
         "The prompt asks for direct, concrete explanations and clearly identifies unresolved questions or unverified limits.",
-        "The complete Codex /goal prompt does not exceed 4,000 characters."
+        "The output is a handoff only: it does not execute the task or add unrequested commit, push, or publication steps."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "첨부된 reports-plan.md는 /workspace/reports의 docs/reports-plan.md와 같은 승인된 문서야. 다음 세션도 같은 저장소를 열 거야. 이 계획의 승인된 구현 범위를 끝내는 /goal을 goalify로 만들어줘.",
+      "expected_output": "A concise Korean goal pointing to the canonical plan and approved scope, inheriting its design and completion criteria without reconstructing the plan.",
+      "files": [
+        "evals/files/reports-plan.md"
+      ],
+      "expectations": [
+        "The supplied plan is read before its sufficiency or approved scope is described.",
+        "The goal identifies /workspace/reports and docs/reports-plan.md as the task specification for approved Phase 1 and Phase 2, not the temporary fixture path.",
+        "Phase 3 remains outside the task; its unresolved future decisions do not trigger replanning of the approved phases.",
+        "Design decisions, validation, and completion criteria are inherited by source reference, without a parallel step list, interface inventory, or acceptance checklist copied or paraphrased from the plan.",
+        "The prompt requests a concise explanation of changes, important reasons, verification, and limits.",
+        "The prompt uses the requested language and requires that language for progress updates and the final response.",
+        "The output only prepares the handoff; it does not execute implementation or add unrequested commit, push, or publication steps."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "첨부한 reports-plan.md가 /workspace/reports/docs/reports-plan.md의 현재 계획이야. Phase 1은 이미 완료됐고, Phase 2의 메뉴 연결도 끝났어. 다음 세션에서는 Phase 2의 남은 작업만 이어가고 싶어. goalify로 만들어줘.",
+      "expected_output": "A Korean source-referenced continuation goal limited to remaining Phase 2 work, preserving the reported completed work and checking actual state before continuing.",
+      "files": [
+        "evals/files/reports-plan.md"
+      ],
+      "expectations": [
+        "The goal references /workspace/reports, docs/reports-plan.md, and Phase 2.",
+        "The reported completion of Phase 1 and Phase 2 menu wiring is retained without being claimed as freshly verified.",
+        "The next session checks current implementation and finishes remaining Phase 2 work instead of reimplementing completed work.",
+        "Phase 3 and optional future work remain outside the task.",
+        "Phase 2 design, verification, and completion are referenced rather than rewritten as a second plan.",
+        "The prompt uses the requested language and requires that language for progress updates and the final response.",
+        "The output only prepares the handoff; it does not execute implementation or add unrequested commit, push, or publication steps."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Use goalify for Phase 2 of the attached plan at /workspace/reports/docs/reports-plan.md. After approving it, we agreed to replace CSV with JSON: an array of objects with title, owner, updatedAt, and status. That decision replaces CSV-specific formatting and escaping checks; the filtering, access, and UI requirements still apply. Someone also suggested Parquet but we have not accepted it. The next session has the repository. Write the goal in English.",
+      "expected_output": "An English source-referenced goal preserving only the accepted JSON delta and its effect on validation, without promoting Parquet or retaining incompatible CSV checks.",
+      "files": [
+        "evals/files/reports-plan.md"
+      ],
+      "expectations": [
+        "The goal identifies the canonical plan and limits execution to Phase 2.",
+        "The later accepted JSON array format and title, owner, updatedAt, status fields explicitly override the document's CSV format.",
+        "CSV-specific BOM, record-separator, and escaping requirements are superseded, including their corresponding checks; applicable filter, access, and UI requirements remain.",
+        "The unaccepted Parquet suggestion is not promoted to required work or an overriding decision.",
+        "Unchanged implementation details and acceptance criteria are inherited by reference rather than restated.",
+        "The prompt uses the requested language and requires that language for progress updates and the final response.",
+        "The output only prepares the handoff; it does not execute implementation or add unrequested commit, push, or publication steps."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "첨부한 문서는 /workspace/auth-service/docs/auth-plan.md 초안이야. 기존 사용자 로그인 유지와 API 계약 보존은 확정됐지만 인증 방식과 만료·저장 방식은 아직 결정하지 않았어. 다음 세션에서 이 결정을 먼저 정리하도록 goalify로 넘겨줘.",
+      "expected_output": "A Korean decision-focused handoff that references the draft, preserves settled constraints, and exposes missing decisions without inventing a ready-to-implement architecture.",
+      "files": [
+        "evals/files/auth-draft.md"
+      ],
+      "expectations": [
+        "The draft is read and is not treated as a complete approved implementation plan solely because of its title.",
+        "The goal preserves /workspace/auth-service, docs/auth-plan.md, existing sign-ins, and the public API contract directly or by precise reference.",
+        "Cookie versus bearer-token choice, expiration, storage, rollout, and acceptance checks remain decisions to resolve rather than invented requirements.",
+        "The next session is asked to resolve the decisions first, not to implement an assumed authentication architecture.",
+        "The prompt uses the requested language and requires that language for progress updates and the final response.",
+        "The output only prepares the handoff; it does not execute implementation or add unrequested commit, push, or publication steps."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "/workspace/payments의 docs/settlement-plan.md에 있는 2단계 구현을 다음 세션에서 이어갈 /goal로 만들어줘. 지금 환경에는 그 저장소나 문서가 없어서 읽을 수 없고, 다음 세션에서는 접근할 수 있어. 다른 내용은 여기서 추측하지 말아줘.",
+      "expected_output": "A Korean limited handoff preserving the user-provided locator and scope, disclosing unread content, and requiring access and inspection before dependent implementation.",
+      "files": [],
+      "expectations": [
+        "The response states that the plan was unavailable or unread and does not claim its completeness was verified.",
+        "The goal preserves /workspace/payments, docs/settlement-plan.md, and the user-provided Phase 2 scope.",
+        "Reading and inspecting the plan is required before dependent implementation in the next session.",
+        "No plan contents, subsection names, test commands, architecture, or approval status are fabricated.",
+        "A usable limited handoff is returned without demanding that the user resend a document they already said is unavailable here.",
+        "The prompt uses the requested language and requires that language for progress updates and the final response.",
+        "The output only prepares the handoff; it does not execute implementation or add unrequested commit, push, or publication steps."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "이 계획은 파일로 저장하지 않았고 다음 세션에는 이 대화가 없어. 작업 경로는 /workspace/uploader야. 내용: CSV 업로드는 10MB 이하만 허용, 초과하면 UPLOAD_TOO_LARGE, 빈 파일이면 EMPTY_UPLOAD를 반환. 기존 성공 응답은 유지. 크기 경계와 빈 파일 회귀 테스트가 통과하면 완료. 이 내용으로 한국어 /goal을 만들어줘. 파일 저장은 하지 마.",
+      "expected_output": "A self-contained Korean goal carrying the unstored plan inline, without an invented document reference or file creation.",
+      "files": [],
+      "expectations": [
+        "The goal includes /workspace/uploader and the necessary inline requirements because no durable document is available to the destination session.",
+        "The inclusive 10MB limit, UPLOAD_TOO_LARGE, EMPTY_UPLOAD, and preservation of successful responses are retained accurately.",
+        "Completion retains size-boundary and empty-file regression checks without adding an unrelated framework or exact test command.",
+        "The output does not invent a plan path, rely on the absent previous conversation, or create a plan file.",
+        "The prompt uses the requested language and requires that language for progress updates and the final response.",
+        "The output only prepares the handoff; it does not execute implementation or add unrequested commit, push, or publication steps."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "지금까지의 대화를 다음 세션용 goalify로 정리해줘. 처음에는 /workspace/importer의 CSV 파서와 저장소 계층을 모두 바꾸자고 했지만, 최종 결정은 feat/strict-csv 브랜치에서 src/csv/parser.ts의 중복 헤더 검출만 수정하는 거야. 중복 헤더면 DUPLICATE_HEADER를 반환하고, 기존 정상 CSV 처리는 유지해야 해. 저장소 계층 변경은 이번 범위에서 제외했어. 기존 사용자 변경을 보존하고, 구현은 꼭 TDD로 진행해서 npm test -- csv-parser로 검증해줘. 완료 후에는 변경 전후와 핵심 동작을 초보자도 이해할 수 있는 예시로 설명해줘. 커밋이나 푸시는 하지 마.",
+      "expected_output": "A Korean conversation-derived goal preserving the final narrowed scope, branch, explicit TDD and teaching requests, exact validation, and no-commit boundary.",
+      "files": [],
+      "expectations": [
+        "The goal preserves /workspace/importer, feat/strict-csv, and src/csv/parser.ts.",
+        "The final scope is duplicate-header detection with DUPLICATE_HEADER and unchanged valid-CSV behavior; the earlier storage-layer change is excluded.",
+        "Explicit TDD, npm test -- csv-parser, preservation of user changes, and the no-commit/no-push boundary are carried forward.",
+        "The requested beginner-friendly before/after explanation and concrete example are retained rather than dropped in favor of generic brevity.",
+        "The prompt uses Korean and requires Korean progress updates and final explanation.",
+        "The output prepares a usable handoff without implementing it or inventing document references."
       ]
     }
   ]

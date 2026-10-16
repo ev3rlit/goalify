@@ -1,59 +1,59 @@
 # Goalify
 
-Goalify turns an ongoing conversation into a clear `/goal` prompt you can use to start fresh without losing the thread.
+Goalify prepares a copy-pasteable `/goal` prompt for a new session from a conversation, an existing plan, or both.
 
 ## How to use it
 
-Talk through the work first. Explore the problem, make decisions, narrow the scope, and get to the point where the next step feels clear.
-
-Then ask the assistant to use goalify:
+After discussing a task, ask:
 
 ```text
-Use goalify to turn this conversation
+Use goalify to turn this conversation into a goal for the next session.
 ```
 
-Goalify will package the objective, context, constraints, and completion criteria into something you can paste directly into the next session.
+Goalify collects the accepted objective, necessary context, constraints, and completion criteria. It preserves the latest corrections and keeps future ideas separate from the current task.
 
-Goalify's own instructions and reusable scaffold are written in English, but the generated `/goal` follows the language used by the user. It also tells the next session to use that language for progress updates and the final explanation.
+When you already have a plan, ask:
 
-It also asks the next session to teach you what happened after the work is complete. The final explanation covers the important stages in order, why each material choice was made, how the result was checked, and any limits that remain. Technical terms stay intact, but are explained with direct language and concrete examples.
+```text
+Use goalify to prepare a goal for Phase 2 of docs/saved-reports-plan.md.
+```
 
-## Example output
+Goalify reads the relevant source and checks whether it defines the selected work sufficiently. If it does, the prompt connects the next session to that document and scope, without rewriting its implementation steps or acceptance checklist. Later accepted decisions appear only as explicit additions or overrides. The source must be accessible to the next session; an unreadable or incomplete document is identified as such, and missing requirements are not invented.
 
-Goalify might produce a prompt like this:
+The generated prompt follows your language and asks the next session to use it for progress updates and the final explanation. The final explanation covers material changes or findings, important reasons, verification evidence, and remaining limits. Its depth follows the task and your requests.
 
-```markdown
+## Conversation example
+
+The following assumes these requirements and checks were agreed during the conversation:
+
+```text
 /goal
 
-Build the saved reports view in `/workspace/acme-dashboard`.
+Build the saved reports view in /workspace/acme-dashboard using the existing dashboard shell, React, Tailwind, navigation, and table styling. Keep it a compact reports screen.
 
-Context:
+Include title, owner, updated date, and status in the list; add status filtering and an empty state. Preserve existing user changes and unrelated behavior.
 
-- The user wants a compact reports screen, not a marketing-style landing page.
-- The app already uses React, Tailwind, and the existing dashboard shell.
-- Keep the current navigation and table styling consistent with the rest of the product.
+Run the project's existing type check and test commands, then verify the view on desktop and mobile. Complete the task when the list, filtering, and empty state work and the required checks pass.
 
-Task:
-
-1. Add a saved reports list with title, owner, updated date, and status.
-2. Add filtering for report status.
-3. Add an empty state for teams with no saved reports yet.
-
-Verification:
-
-- Run the existing type check and test commands.
-- Open the app locally and confirm the reports page works on desktop and mobile.
-
-Done when:
-
-- The reports view is implemented.
-- Existing behavior is preserved.
-- The final verification commands pass.
-
-After completing the work, explain it to the user:
-
-- Walk through the starting point, important work stages, and final state.
-- For each important stage, explain what changed, why that approach was chosen, and how it was verified.
-- Explain the core mechanism in direct language a 12-year-old could follow, while defining any necessary technical terms.
-- Separate verified results from anything that remains uncertain or untested.
+Use English for progress updates and the final response. Explain the material changes, rationale, verification results, and remaining limits in plain language.
 ```
+
+## Existing-plan example
+
+The following assumes Phase 2 is defined in the document and the export-format correction was accepted afterward:
+
+```text
+/goal
+
+In /workspace/reports, complete Phase 2 of docs/saved-reports-plan.md. Read that section and its referenced prerequisites, check the current implementation, and finish the remaining work using the plan's design, verification, and completion criteria for Phase 2. Phase 3 is outside this task.
+
+The later accepted correction overrides Phase 2's export format: use JSON instead of CSV. All other Phase 2 requirements remain as documented.
+
+Use English for progress updates and the final response. Explain the material changes, rationale, verification results, and remaining limits in plain language.
+```
+
+A short document-based goal is a complete result when the referenced specification supplies the details. For Codex CLI, the generated goal stays under 4,000 characters; other destinations do not inherit that limit automatically.
+
+## Evaluation cases
+
+`Skills/goalify/evals/evals.json` contains conversation regressions and document handoff cases. Input files are relative to the skill directory. The fixtures are supplied documents, not instructions to execute their implementation tasks. Evaluate prompt outputs for requirement preservation, usable references, scope, explicit overrides, and absence of a duplicate plan. A structural validator alone does not establish those behaviors.
